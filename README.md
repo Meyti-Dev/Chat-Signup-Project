@@ -1,5 +1,11 @@
 ### Getting Started
 
+#### Installing Dependencies
+
+```
+npm i
+```
+
 #### Start Project
 
 ```
