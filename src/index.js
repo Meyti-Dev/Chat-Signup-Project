@@ -10,6 +10,8 @@ import AddUser from "./Components/AddUser/AddUser";
 import Users from "./Components/User/Users";
 import ViewUser from "./Components/ViewUser/ViewUser";
 import EditUser from "./Components/EditUser/EditUser.jsx";
+import { Provider } from "react-redux";
+import { store } from "./redux/store.js";
 
 // routes
 const routes = createBrowserRouter([
@@ -40,6 +42,8 @@ const routes = createBrowserRouter([
 // rendering
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={routes} />
+    <Provider store={store}>
+      <RouterProvider router={routes} />
+    </Provider>
   </StrictMode>
 );
