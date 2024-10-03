@@ -11,6 +11,7 @@ const users = createSlice({
     initialState: {
         users: null,
         copyUsers: null,
+        currentUser: null,
     },
     reducers: {
         filter: (state, { payload }) => {
@@ -21,6 +22,14 @@ const users = createSlice({
         builder.addCase(getUsers.fulfilled, (state, { payload }) => {
             state.users = payload;
             state.copyUsers = payload;
+            if (localStorage.getItem("Chat-Project-User") && payload) {
+                const findUser = payload.find(
+                    (user) =>
+                        user.id ===
+                        String(localStorage.getItem("Chat-Project-User"))
+                );
+                state.currentUser = findUser;
+            }
         });
     },
 });

@@ -6,9 +6,12 @@ import axios from "axios";
 import userMan from "../../pictures/219988.png";
 import userWoman from "../../pictures/female-avatar-girl-face-woman-user-4.svg";
 import useSWRMutation from "swr/mutation";
+import { useSelector } from "react-redux";
+import { selectUsers } from "../../redux/users";
 
 // component
 export default function User({
+    userObject,
     userId,
     userName,
     fullName,
@@ -16,11 +19,31 @@ export default function User({
     phone,
     gender,
 }) {
+    // current user
+    const { currentUser } = useSelector(selectUsers);
+
     // delete user
     const { trigger } = useSWRMutation(
         "http://localhost:4000/users/",
         async (url, { arg }) => await axios.delete(`${url}${arg}`)
     );
+
+    // set suggest
+    const { trigger: suggets } = useSWRMutation(
+        `http://localhost:4000/users/${userId}`,
+        async (url, { arg }) =>
+            await axios.put(url, {
+                ...userObject,
+                suggests: [
+                    ...userObject.suggests,
+                    { userName: arg.userName, userId: arg.id },
+                ],
+            })
+    );
+
+    function setSuggest() {
+        suggets(currentUser);
+    }
 
     // jsx
     return (
@@ -101,27 +124,35 @@ export default function User({
                 </div>
 
                 {/* buttons [ delete, update, view ] */}
-                <div className="flex items-center justify-center gap-2.5">
-                    {/* btn, view */}
-                    <Link
-                        to={`/view/${userId}`}
-                        className="flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-yellow-500 hover:bg-yellow-600 transition-colors"
-                    >
-                        دیدن
-                    </Link>
-                    {/* btn, edit */}
-                    <Link
-                        to={`/edit/${userId}`}
-                        className="flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors"
-                    >
-                        ویرایش
-                    </Link>
-                    {/* btn, delete */}
+                <div className="space-y-2.5">
+                    <div className="flex items-center justify-center gap-2.5">
+                        {/* btn, view */}
+                        <Link
+                            to={`/view/${userId}`}
+                            className="flex-grow flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-yellow-500 hover:bg-yellow-600 transition-colors"
+                        >
+                            دیدن
+                        </Link>
+                        {/* btn, edit */}
+                        <Link
+                            to={`/edit/${userId}`}
+                            className="flex-grow flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors"
+                        >
+                            ویرایش
+                        </Link>
+                        {/* btn, delete */}
+                        <button
+                            onClick={() => trigger(userId)}
+                            className="flex-grow flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-red-500 hover:bg-red-600 transition-colors"
+                        >
+                            حذف
+                        </button>
+                    </div>
                     <button
-                        onClick={() => trigger(userId)}
-                        className="flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-red-500 hover:bg-red-600 transition-colors"
+                        onClick={() => setSuggest(userId)}
+                        className="font-vazir-bold w-full h-10 rounded-xl flex items-center justify-center hover:scale-105 bg-white/40 hover:bg-white/50 word transition-all"
                     >
-                        حذف
+                        درخواست چت
                     </button>
                 </div>
             </div>

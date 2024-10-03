@@ -2,6 +2,7 @@
 import { Link, useLocation } from "react-router-dom";
 // icons
 import { IoSearchSharp } from "react-icons/io5";
+import { FaRegUser } from "react-icons/fa6";
 import { useDispatch, useSelector } from "react-redux";
 import { filter, selectUsers } from "../../redux/users";
 import { useState } from "react";
@@ -43,10 +44,10 @@ export default function HeaderButtons() {
             {/* btn, add user */}
             {pathname === "/" && (
                 <Link
-                    className="flex items-center justify-center h-10 px-5 rounded-xl bg-yellow-500 hover:bg-yellow-600 transition-colors font-vazir-medium word"
+                    className="flex items-center justify-center h-10 w-10 rounded-xl bg-yellow-500 hover:bg-yellow-600 transition-colors font-vazir-medium word"
                     to="/adduser"
                 >
-                    مخاطب جدید
+                    <FaRegUser className="text-lg" />
                 </Link>
             )}
             {/* btn, search user */}
