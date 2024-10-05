@@ -38,14 +38,17 @@
         @apply box-border m-0 p-0 border-none outline-none
     }
     body {
-        @apply leading-normal font-vazir-regular bg-zinc-800 select-none
+        @apply leading-normal font-vazir-regular bg-gray-900 select-none
     }
     /* scrollbar */
     ::-webkit-scrollbar {
-        @apply w-[1px]
+        @apply w-2
     }
     ::-webkit-scrollbar-thumb {
-        @apply bg-lime-500
+        @apply bg-gray-700
+    }
+    ::-webkit-scrollbar-track {
+        @apply bg-gray-500
     }
     .chat::-webkit-scrollbar {
         @apply w-0

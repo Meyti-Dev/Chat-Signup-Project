@@ -13,8 +13,14 @@
       "chat": [
         "jImgQm8Kse9Fw0JsxFuWF",
         "UR50BxNJmYVEPOhlBOFcO",
-        "f09UOLAvwJHeixCCEIq2N"
-      ]
+        "f09UOLAvwJHeixCCEIq2N",
+        "Lj32IEqOnSvPfC8l60A0e",
+        "QgynfoMHZ6l4sBTIz-csU"
+      ],
+      "isAdmin": true,
+      "settings": {
+        "fontSize": "text-sm"
+      }
     },
     {
       "id": "9558",
@@ -24,11 +30,17 @@
       "phoneNumber": "09678944442",
       "date": "2024 / 6 / 2",
       "gender": "زن",
-      "suggests": [],
+      "suggests": [
+        {
+          "userName": "mahdiram",
+          "userId": "c724"
+        }
+      ],
       "messages": [],
       "chat": [
         "UR50BxNJmYVEPOhlBOFcO"
-      ]
+      ],
+      "isAdmin": false
     },
     {
       "userName": "رررررررررررر",
@@ -41,38 +53,128 @@
       "messages": [],
       "chat": [
         "jImgQm8Kse9Fw0JsxFuWF"
-      ]
-    },
-    {
-      "id": "9f69",
-      "userName": "تشهشخهی",
-      "fullName": "sadasdasd",
-      "password": "adsadasdas",
-      "phoneNumber": "asdasdasdaa",
-      "gender": "زن",
-      "date": "۱۴۰۳/۷/۱۱",
-      "suggests": [],
-      "messages": [],
-      "chat": [
-        "f09UOLAvwJHeixCCEIq2N"
-      ]
+      ],
+      "isAdmin": false
     }
   ],
   "chats": [
     {
       "id": "9463",
       "chatId": "jImgQm8Kse9Fw0JsxFuWF",
-      "chat": []
+      "deletedAccount": false,
+      "removedChat": false,
+      "chat": [
+        {
+          "userName": "mahdiram",
+          "content": "سلام خوبی"
+        },
+        {
+          "userName": "sara",
+          "content": "ممنون تو خوبی..."
+        },
+        {
+          "userName": "mahdiram",
+          "content": "hvi ph[d"
+        }
+      ]
     },
     {
       "id": "6942",
       "chatId": "UR50BxNJmYVEPOhlBOFcO",
-      "chat": []
+      "deletedAccount": false,
+      "removedChat": false,
+      "chat": [
+        {
+          "userName": "mahdiram",
+          "content": "سلام خوبی"
+        },
+        {
+          "userName": "اهورا",
+          "content": "ممنون تو خوبی..."
+        },
+        {
+          "userName": "mahdiram",
+          "content": "دیشب چی شد؟"
+        },
+        {
+          "userName": "اهورا",
+          "content": "هیچی والا"
+        },
+        {
+          "userName": "mahdiram",
+          "content": "سلام مشتی"
+        },
+        {
+          "userName": "اهورا",
+          "content": "دادا بیداری"
+        },
+        {
+          "userName": "mahdiram",
+          "content": "اره بیدارم"
+        },
+        {
+          "userName": "اهورا",
+          "content": "هیچی اوکیه"
+        },
+        {
+          "userName": "mahdiram",
+          "content": "a"
+        },
+        {
+          "userName": "mahdiram",
+          "content": "حا حا حا "
+        },
+        {
+          "userName": "mahdiram",
+          "content": "سلام خوبی"
+        },
+        {
+          "userName": "اهورا",
+          "content": "ضشحیب"
+        }
+      ]
     },
     {
       "id": "baa7",
       "chatId": "f09UOLAvwJHeixCCEIq2N",
+      "deletedAccount": true,
+      "removedChat": false,
       "chat": []
+    },
+    {
+      "id": "3fdb",
+      "chatId": "Lj32IEqOnSvPfC8l60A0e",
+      "deletedAccount": true,
+      "removedChat": false,
+      "chat": [
+        {
+          "userName": "mahdiram",
+          "content": "سلام دادا ممنون که قبول کردی"
+        },
+        {
+          "userName": "mostafa",
+          "content": "قربونت دادا این چه حرفیه معلومه قبول میکنم سلطان"
+        },
+        {
+          "userName": "mahdiram",
+          "content": "aaaa"
+        }
+      ]
+    },
+    {
+      "id": "cb3d",
+      "chatId": "QgynfoMHZ6l4sBTIz-csU",
+      "chat": [
+        {
+          "userName": "mahdiram",
+          "content": "aaaaaa"
+        },
+        {
+          "userName": "ششششششششششششش",
+          "content": "اقا لطفا مزاحم نشید"
+        }
+      ],
+      "deletedAccount": true
     }
   ]
 }

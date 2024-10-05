@@ -8,6 +8,7 @@ import userWoman from "../../pictures/female-avatar-girl-face-woman-user-4.svg";
 import useSWRMutation from "swr/mutation";
 import { useSelector } from "react-redux";
 import { selectUsers } from "../../redux/users";
+import { selectChats } from "../../redux/chats";
 
 // component
 export default function User({
@@ -18,15 +19,45 @@ export default function User({
     password,
     phone,
     gender,
+    chat,
 }) {
     // current user
     const { currentUser } = useSelector(selectUsers);
+    const { chats } = useSelector(selectChats);
 
-    // delete user
+    // -------------------------------------------------------------------------------------------- delete & update chats
+    // deleted user
     const { trigger } = useSWRMutation(
         "http://localhost:4000/users/",
         async (url, { arg }) => await axios.delete(`${url}${arg}`)
     );
+
+    // update chats after deleted user
+    const { trigger: updateChatsAfterDeletedUser } = useSWRMutation(
+        "http://localhost:4000/chats/",
+        async (url, { arg }) => await axios.put(`${url}${arg.id}`, arg)
+    );
+
+    // delete user
+    async function deletedUser(id) {
+        const isDeleted = await trigger(id);
+
+        if (isDeleted.statusText === "OK") {
+            chats?.map((globalChat) => {
+                return (
+                    currentUser?.chat.some(
+                        (currentUserChatId) =>
+                            currentUserChatId === globalChat.chatId
+                    ) &&
+                    updateChatsAfterDeletedUser({
+                        ...globalChat,
+                        deletedAccount: true,
+                    })
+                );
+            });
+        }
+    }
+    // --------------------------------------------------------------------------------------------
 
     // set suggest
     const { trigger: suggets } = useSWRMutation(
@@ -45,9 +76,14 @@ export default function User({
         suggets(currentUser);
     }
 
+    // isChat
+    const isChat = currentUser?.chat.some((currentUserChat) =>
+        chat?.some((userChat) => userChat === currentUserChat)
+    );
+
     // jsx
     return (
-        <div className="bg-zinc-700 p-5 rounded-xl overflow-hidden space-y-6">
+        <div className="bg-gray-800 p-5 rounded-xl overflow-hidden space-y-6">
             {/* user image */}
             <div className="flex items-center justify-center w-full overflow-hidden border-b border-solid border-white/10 pb-5">
                 {/* image */}
@@ -63,7 +99,7 @@ export default function User({
                 {/* user imformations */}
                 <div className="space-y-2">
                     {/* user name */}
-                    <div className="flex items-center justify-between bg-zinc-600 overflow-hidden rounded-xl py-2 px-3">
+                    <div className="flex items-center justify-between bg-gray-700 overflow-hidden rounded-xl py-2 px-3">
                         {/* title */}
                         <p className="text-[rgba(255,255,255,.6)] font-vazir-medium text-sm word">
                             نام کاربری
@@ -75,7 +111,7 @@ export default function User({
                     </div>
 
                     {/* full name */}
-                    <div className="flex items-center justify-between bg-zinc-600 overflow-hidden rounded-xl py-2 px-3">
+                    <div className="flex items-center justify-between bg-gray-700 overflow-hidden rounded-xl py-2 px-3">
                         {/* title */}
                         <p className="text-[rgba(255,255,255,.6)] font-vazir-medium text-sm word">
                             نام کامل
@@ -87,7 +123,7 @@ export default function User({
                     </div>
 
                     {/* password */}
-                    <div className="flex items-center justify-between bg-zinc-600 overflow-hidden rounded-xl py-2 px-3">
+                    <div className="flex items-center justify-between bg-gray-700 overflow-hidden rounded-xl py-2 px-3">
                         {/* title */}
                         <p className="text-[rgba(255,255,255,.6)] font-vazir-medium text-sm word">
                             رمز عبور
@@ -99,7 +135,7 @@ export default function User({
                     </div>
 
                     {/* phone number */}
-                    <div className="flex items-center justify-between bg-zinc-600 overflow-hidden rounded-xl py-2 px-3">
+                    <div className="flex items-center justify-between bg-gray-700 overflow-hidden rounded-xl py-2 px-3">
                         {/* title */}
                         <p className="text-[rgba(255,255,255,.6)] font-vazir-medium text-sm word">
                             شماره تلفن
@@ -111,7 +147,7 @@ export default function User({
                     </div>
 
                     {/* gender */}
-                    <div className="flex items-center justify-between bg-zinc-600 overflow-hidden rounded-xl py-2 px-3">
+                    <div className="flex items-center justify-between bg-gray-700 overflow-hidden rounded-xl py-2 px-3">
                         {/* title */}
                         <p className="text-[rgba(255,255,255,.6)] font-vazir-medium text-sm word">
                             جنسیت
@@ -142,18 +178,25 @@ export default function User({
                         </Link>
                         {/* btn, delete */}
                         <button
-                            onClick={() => trigger(userId)}
+                            onClick={() => deletedUser(userId)}
                             className="flex-grow flex items-center justify-center font-vazir-medium text-sm w-16 h-10 word rounded-xl bg-red-500 hover:bg-red-600 transition-colors"
                         >
                             حذف
                         </button>
                     </div>
-                    <button
-                        onClick={() => setSuggest(userId)}
-                        className="font-vazir-bold w-full h-10 rounded-xl flex items-center justify-center hover:scale-105 bg-white/40 hover:bg-white/50 word transition-all"
-                    >
-                        درخواست چت
-                    </button>
+                    {!(currentUser?.id === userId) && (
+                        <button
+                            disabled={isChat}
+                            onClick={() => setSuggest(userId)}
+                            className={`font-vazir-medium text-sm w-full h-10 rounded-xl flex items-center justify-center ${
+                                isChat
+                                    ? "text-green-500"
+                                    : "bg-white/40 hover:bg-white/50 hover:scale-105"
+                            } word transition-all`}
+                        >
+                            {isChat ? "درخواست چت پذیرفته شد" : "درخواست چت"}
+                        </button>
+                    )}
                 </div>
             </div>
         </div>

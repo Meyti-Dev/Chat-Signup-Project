@@ -13,6 +13,8 @@ import Suggests from "./Components/suggests/Suggests.jsx";
 import EditUser from "./Components/EditUser/EditUser.jsx";
 import { Provider } from "react-redux";
 import { store } from "./redux/store.js";
+import AdminPanel from "./Components/admin_panel/AdminPanel.jsx";
+import Messages from "./Components/Messages/Messages.jsx";
 
 // routes
 const routes = createBrowserRouter([
@@ -39,6 +41,14 @@ const routes = createBrowserRouter([
             {
                 path: "/suggests/:ID",
                 element: <Suggests />,
+            },
+            {
+                path: "/messages/:ID",
+                element: <Messages />,
+            },
+            {
+                path: "/adminpanel",
+                element: <AdminPanel />,
             },
         ],
     },

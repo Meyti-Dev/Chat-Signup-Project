@@ -3,6 +3,7 @@ import { useSelector } from "react-redux";
 import { selectUsers } from "../../redux/users";
 import { Link } from "react-router-dom";
 import { BiMessageSquareDetail } from "react-icons/bi";
+import { GrUserAdmin } from "react-icons/gr";
 
 // component
 export default function HeaderTitle() {
@@ -30,7 +31,7 @@ export default function HeaderTitle() {
             </Link>
             {/* messages */}
             <Link
-                to={`/suggests/${currentUser?.id}`}
+                to={`/messages/${currentUser?.id}`}
                 className="relative flex items-center justify-center rounded-xl bg-blue-500 hover:bg-blue-600 transition-colors h-10 w-10"
             >
                 {/* count */}
@@ -43,6 +44,14 @@ export default function HeaderTitle() {
                 )}
                 {/* icon */}
                 <BiMessageSquareDetail className="text-white text-xl" />
+            </Link>
+            {/* management panel */}
+            <Link
+                to={"/adminpanel"}
+                className="relative flex items-center justify-center rounded-xl bg-red-500 hover:bg-red-600 transition-colors h-10 w-10"
+            >
+                {/* icon */}
+                <GrUserAdmin className="text-white text-xl" />
             </Link>
         </div>
     );

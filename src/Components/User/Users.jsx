@@ -27,14 +27,14 @@ export default function Users() {
             {/* current user */}
             <div
                 className={`${
-                    currentUser ? "bg-zinc-700" : "bg-red-500"
+                    currentUser ? "bg-gray-800" : "bg-red-500"
                 } rounded-xl overflow-hidden p-5
                 `}
             >
                 {currentUser ? (
                     <div className="flex items-stretch justify-between gap-5">
                         {/* content */}
-                        <div className="shrink-0 bg-zinc-600 w-96 rounded-xl overflow-hidden flex items-center justify-between flex-col p-5">
+                        <div className="shrink-0 bg-gray-700 w-96 rounded-xl overflow-hidden flex items-center justify-between flex-col p-5">
                             <div className="w-full flex items-center justify-between">
                                 <p className="word text-white/50">شناسه</p>
                                 <p className="text-white">{currentUser?.id}</p>
@@ -79,7 +79,7 @@ export default function Users() {
                             </div>
                         </div>
                         {/* buttons */}
-                        <div className="w-full space-y-3">
+                        <div className="w-full space-y-3 h-full my-auto">
                             <button className="w-full flex items-center justify-center h-10 bg-blue-500 hover:bg-blue-600 rounded-xl word font-vazir-medium transition-colors">
                                 رفتن به صفحه چت
                             </button>
@@ -94,6 +94,18 @@ export default function Users() {
                                 className="flex items-center justify-center h-10 bg-yellow-500 hover:bg-yellow-600 rounded-xl word font-vazir-mediu transition-colorsm"
                             >
                                 دیدن دقیق اطلاعات
+                            </Link>
+                            <Link
+                                to={`/suggests/${currentUser?.id}`}
+                                className="flex items-center justify-center h-10 bg-lime-500 hover:bg-lime-600 rounded-xl word font-vazir-mediu transition-colorsm"
+                            >
+                                درخواست های چت
+                            </Link>
+                            <Link
+                                to={`/view/${currentUser?.id}`}
+                                className="flex items-center justify-center h-10 bg-cyan-500 hover:bg-cyan-600 rounded-xl word font-vazir-mediu transition-colorsm"
+                            >
+                                پیام های ورودی
                             </Link>
                             <button
                                 onClick={removeAccount}
@@ -146,20 +158,12 @@ export default function Users() {
                             password={user.password}
                             phone={user.phone}
                             gender={user.gender}
+                            chat={user.chat}
                         />
                     ))
                 ) : (
                     <NotFoundUser />
                 )}
-            </div>
-            {/* footer */}
-            <div className="fixed bottom-0 right-0 left-0 flex items-center justify-center gap-3 text-white bg-zinc-700 h-14 border-t border-solid border-white/10">
-                <div className="w-3 h-3 rounded-full bg-lime-500 shadow-[0_0_1rem_#84cc16]"></div>
-                {/* text */}
-                <h1 className="text-white word">
-                    ساخته شده توسط{" "}
-                    <span className="text-lime-500">مهدی رمضانی</span>
-                </h1>
             </div>
         </main>
     );
